@@ -8,6 +8,11 @@ A command-line tool that checks URLs against a list of known malicious domains u
 cargo build --release
 ./target/release/url-checker
 ```
+## Tests
+
+```
+cargo test
+```
 
 ## How it works
 
