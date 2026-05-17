@@ -56,3 +56,22 @@ impl BitBloomFilter {
         })
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_contains_added_item() {
+        let mut filter = BitBloomFilter::new(1000, 3);
+        filter.add(&"https://evil.com");
+        assert!(filter.contains(&"https://evil.com"));
+    }
+
+    #[test]
+    fn test_does_not_contain_unknown_item() {
+        let mut filter = BitBloomFilter::new(1000, 3);
+        filter.add(&"https://evil.com");
+        assert!(!filter.contains(&"https://safe.com"));
+    }
+}
