@@ -1,5 +1,5 @@
 # url-checker
-![CI](https://github.com/jacullmann/url-checker/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/jacullmann/url-checker/actions/workflows/ci.yaml/badge.svg)
 
 A command-line tool that checks URLs against a list of known malicious domains using a Bloom filter.
 
