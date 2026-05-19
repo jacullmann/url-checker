@@ -32,7 +32,7 @@ pub fn handle_prepare() {
 
     let mut element_count = 0;
 
-    while reader.read_line(&mut line).unwrap_or(0) > 0 {
+    while reader.read_line(&mut line).unwrap_or(0) > 0 { // TODO: Improve error handling
         let trimmed = line.trim();
 
         if !trimmed.starts_with('#') && !trimmed.is_empty() {
@@ -91,7 +91,7 @@ pub fn handle_prepare() {
 
     let mut processed = 0;
 
-    while reader.read_line(&mut line).unwrap_or(0) > 0 {
+    while reader.read_line(&mut line).unwrap_or(0) > 0 { // TODO: Improve error handling
         let trimmed = line.trim();
 
         if !trimmed.starts_with('#') && !trimmed.is_empty() {
