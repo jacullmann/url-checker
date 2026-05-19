@@ -8,7 +8,7 @@ use std::{
     io::{BufRead, BufReader, Write},
 };
 
-pub fn handle_build() {
+pub fn handle_prepare() {
     println!("downloading...");
 
     let client = reqwest::blocking::Client::builder()
@@ -50,7 +50,7 @@ pub fn handle_build() {
 
     let bit_size = optimal_bit_size(element_count, config::TARGET_FALSE_POSITIVE_RATE);
 
-    println!("building...");
+    println!("preparing...");
 
     let byte_size = bit_size.div_ceil(8);
 

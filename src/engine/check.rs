@@ -4,7 +4,7 @@ use std::{fs::File, io::Read};
 
 pub fn handle_check(raw_url: &str) {
     if !std::path::Path::new(config::FILTER_PATH).exists() {
-        println!("couldn't find prepared data. please run 'build' first");
+        println!("couldn't find prepared data. please run 'prepare' first");
 
         return;
     }

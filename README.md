@@ -11,7 +11,7 @@ cargo build --release
 ```
 
 `build` downloads the latest list of malicious URLs from `URLhaus` and saves a prepared bloom filter to disk.  
-`check` checks whether the entered url possibly appears in the list
+`check` checks whether the entered URL possibly appears in the list
 
 ## Tests
 
