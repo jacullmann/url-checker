@@ -1,7 +1,8 @@
 use fnv::FnvHasher;
 use std::hash::{Hash, Hasher};
 
-// n = item count, p = false-positive rate
+// n = item count
+// p = false-positive rate
 // m = -(n * ln(p)) / ln(2)²
 pub fn optimal_bit_size(n: usize, p: f64) -> usize {
     let n = n as f64;
