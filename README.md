@@ -10,7 +10,7 @@ cargo build --release
 ./target/release/url-checker check <url>
 ```
 
-`build` downloads the latest list of malicious URLs from `URLhaus` and saves a prepared bloom filter to the disk.  
+`build` downloads the latest list of malicious URLs from `URLhaus` and saves a prepared bloom filter to disk.  
 `check` checks whether the entered url possibly appears in the list
 
 ## Tests
