@@ -21,14 +21,14 @@ pub fn handle_check(raw_url: &str) {
     file.read_exact(&mut u64_buf)
         .expect("malformed filter file header");
 
-    let num_hashes = u64::from_le_bytes(u64_buf) as usize;
+    let hash_count = u64::from_le_bytes(u64_buf) as usize;
 
     let mmap = unsafe { Mmap::map(&file).expect("Failed to initialize memory-mapped data lookup") };
 
-    // skip the 16-byte header (bit_size + num_hashes) to get to the bitfield
+    // skip the 16-byte header (bit_size + hash_count) to get to the bitfield
     let bit_slice = &mmap[16..];
 
-    let filter = BloomFilter::new(bit_slice, bit_size, num_hashes);
+    let filter = BloomFilter::new(bit_slice, bit_size, hash_count);
 
     let normalized = normalize_url(raw_url);
 

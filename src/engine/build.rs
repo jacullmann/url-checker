@@ -62,6 +62,7 @@ pub fn handle_build() {
         .open(config::FILTER_PATH)
         .expect("failed to create file");
 
+    // header: [bit_size: 8 bytes][hash_count: 8 bytes] = 16 bytes total
     file.write_all(&(bit_size as u64).to_le_bytes())
         .expect("failed to write bit_size");
 

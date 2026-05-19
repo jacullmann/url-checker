@@ -40,6 +40,8 @@ m = -(n * ln(p)) / ln(2)²   ->  optimal bit count
 k = (m / n) * ln(2)         ->  optimal hash count
 ```
 
+Since the target false-positive rate is 1% the optimal hash count converges to approximately 7 and is therefore kept constant in this tool. 
+
 ### Hashing
 
 Two independent FNV hash values with different seeds are computed for each URL. All `k` positions are then derived via double hashing:
