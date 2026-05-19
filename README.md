@@ -1,4 +1,5 @@
 # url-checker
+![CI](https://github.com/jacullmann/url-checker/actions/workflows/ci.yml/badge.svg)
 
 A command-line tool that checks URLs against a list of known malicious domains using a Bloom filter.
 
@@ -44,7 +45,7 @@ Since the target false-positive rate is 1% the optimal hash count converges to a
 
 ### Hashing
 
-Two independent FNV hash values with different seeds are computed for each URL. All `k` positions are then derived via double hashing:
+Two independent XXH3 hash values with different seeds are computed for each URL. All `k` positions are then derived via double hashing:
 
 ```
 h(i) = h1 + i * h2   for i = 0..k

@@ -1,29 +1,28 @@
 use crate::engine::{config, filter::BloomFilter, normalization::normalize_url};
+use anyhow::{Context, Result};
 use memmap2::Mmap;
 use std::{fs::File, io::Read};
 
-pub fn handle_check(raw_url: &str) {
+pub fn handle_check(raw_url: &str) -> Result<()> {
     if !std::path::Path::new(config::FILTER_PATH).exists() {
         println!("couldn't find prepared data. please run 'prepare' first");
-
-        return;
+        return Ok(());
     }
 
-    let mut file = File::open(config::FILTER_PATH).expect("failed to open filter file");
+    let mut file = File::open(config::FILTER_PATH)
+        .with_context(|| format!("failed to open filter file at {}", config::FILTER_PATH))?;
 
     let mut u64_buf = [0u8; 8];
 
     file.read_exact(&mut u64_buf)
-        .expect("malformed filter file header");
-
+        .context("malformed filter file: could not read bit_size from header")?;
     let bit_size = u64::from_le_bytes(u64_buf) as usize;
 
     file.read_exact(&mut u64_buf)
-        .expect("malformed filter file header");
-
+        .context("malformed filter file: could not read hash_count from header")?;
     let hash_count = u64::from_le_bytes(u64_buf) as usize;
 
-    let mmap = unsafe { Mmap::map(&file).expect("Failed to initialize memory-mapped data lookup") };
+    let mmap = unsafe { Mmap::map(&file).context("failed to memory-map filter file")? };
 
     // skip the 16-byte header (bit_size + hash_count) to get to the bitfield
     let bit_slice = &mmap[16..];
@@ -37,4 +36,6 @@ pub fn handle_check(raw_url: &str) {
     } else {
         println!("NOT FOUND – SAFE");
     }
+
+    Ok(())
 }
