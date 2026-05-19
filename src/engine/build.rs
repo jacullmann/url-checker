@@ -106,7 +106,7 @@ pub fn handle_build() {
             if processed % 25_000 == 0 || processed == element_count {
                 print!("\rpreparing data [{}/{}]", processed, element_count);
 
-                std::io::stdout().flush().unwrap();
+                std::io::stdout().flush().expect("failed to flush stdout")
             }
         }
         line.clear();
