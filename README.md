@@ -77,4 +77,3 @@ The URL dataset is from [URLhaus](https://urlhaus.abuse.ch).
 ## License
 
 MIT — see [LICENSE](./LICENSE).
-```
