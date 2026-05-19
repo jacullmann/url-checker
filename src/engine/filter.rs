@@ -104,6 +104,6 @@ mod tests {
     fn test_calculate_optimal_m() {
         let m = optimal_bit_size(78_000, 0.01);
 
-        assert!(m >= 4_000_000 && m <= 4_500_000);
+        assert!(m >= 700_000 && m <= 800_000);
     }
 }
