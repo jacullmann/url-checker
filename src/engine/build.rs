@@ -78,12 +78,16 @@ pub fn handle_build() {
 
     let bit_slice = &mut mmap[16..];
 
-    let response = client
-        .get(config::DATA_URL)
-        .send()
-        .expect("failed to establish connection to source");
+    let response = match client.get(config::DATA_URL).send() {
+        Ok(r) => r,
+        Err(e) => {
+            eprintln!("error: failed to fetch data: {e}");
+            return;
+        }
+    };
 
     let mut reader = BufReader::new(response);
+
     let mut processed = 0;
 
     while reader.read_line(&mut line).unwrap_or(0) > 0 {
