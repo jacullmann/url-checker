@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-fnv = "1.0"
+xxhash-rust = { version = "0.8", features = ["xxh3"] }
 
 url = "2.5"
 

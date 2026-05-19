@@ -1,5 +1,4 @@
-use fnv::FnvHasher;
-use std::hash::{Hash, Hasher};
+use xxhash_rust::xxh3::xxh3_64_with_seed;
 
 // n = item count
 // p = false-positive rate
@@ -17,13 +16,9 @@ pub fn optimal_bit_size(n: usize, p: f64) -> usize {
 pub fn bit_indices(item: &str, hash_count: usize, bit_size: usize) -> impl Iterator<Item = usize> {
     let bit_size = bit_size as u64;
 
-    let mut h1 = FnvHasher::with_key(0);
-    item.hash(&mut h1);
-    let hash1 = h1.finish();
+    let hash1 = xxh3_64_with_seed(item.as_bytes(), 0);
 
-    let mut h2 = FnvHasher::with_key(1);
-    item.hash(&mut h2);
-    let hash2 = h2.finish();
+    let hash2 = xxh3_64_with_seed(item.as_bytes(), 1);
 
     (0..hash_count).map(move |i| {
         let combined = hash1.wrapping_add((i as u64).wrapping_mul(hash2));
