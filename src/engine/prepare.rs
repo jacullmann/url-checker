@@ -101,6 +101,7 @@ pub fn handle_prepare() -> Result<()> {
         let bytes_read = reader
             .read_line(&mut line)
             .context("failed to read line from data stream during fill pass")?;
+        
         if bytes_read == 0 {
             break;
         }

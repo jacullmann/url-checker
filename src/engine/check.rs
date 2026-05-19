@@ -6,6 +6,7 @@ use std::{fs::File, io::Read};
 pub fn handle_check(raw_url: &str) -> Result<()> {
     if !std::path::Path::new(config::FILTER_PATH).exists() {
         println!("couldn't find prepared data. please run 'prepare' first");
+
         return Ok(());
     }
 
@@ -16,10 +17,12 @@ pub fn handle_check(raw_url: &str) -> Result<()> {
 
     file.read_exact(&mut u64_buf)
         .context("malformed filter file: could not read bit_size from header")?;
+
     let bit_size = u64::from_le_bytes(u64_buf) as usize;
 
     file.read_exact(&mut u64_buf)
         .context("malformed filter file: could not read hash_count from header")?;
+
     let hash_count = u64::from_le_bytes(u64_buf) as usize;
 
     let mmap = unsafe { Mmap::map(&file).context("failed to memory-map filter file")? };
