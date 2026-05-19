@@ -6,11 +6,11 @@ A command-line tool that checks URLs against a list of known malicious domains u
 
 ```
 cargo build --release
-./target/release/url-checker build
+./target/release/url-checker prepare
 ./target/release/url-checker check <url>
 ```
 
-`build` downloads the latest list of malicious URLs from `URLhaus` and saves a prepared bloom filter to disk.  
+`prepare` downloads the latest list of malicious URLs from `URLhaus` and saves a prepared bloom filter to disk.  
 `check` checks whether the entered URL possibly appears in the list
 
 ## Tests
