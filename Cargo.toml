@@ -5,13 +5,8 @@ edition = "2024"
 
 [dependencies]
 xxhash-rust = { version = "0.8", features = ["xxh3"] }
-
 url = "2.5"
-
 memmap2 = "0.9"
-
 clap = { version = "4.5", features = ["derive"] }
-
 reqwest = { version = "0.13", features = ["blocking"] }
-
 anyhow = "1"

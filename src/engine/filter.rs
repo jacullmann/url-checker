@@ -7,9 +7,7 @@ pub fn optimal_bit_size(n: usize, p: f64) -> usize {
     let n = n as f64;
 
     let num = -n * p.ln();
-
     let den = 2.0f64.ln().powi(2);
-
     (num / den).ceil() as usize
 }
 
@@ -17,7 +15,6 @@ pub fn bit_indices(item: &str, hash_count: usize, bit_size: usize) -> impl Itera
     let bit_size = bit_size as u64;
 
     let hash1 = xxh3_64_with_seed(item.as_bytes(), 0);
-
     let hash2 = xxh3_64_with_seed(item.as_bytes(), 1);
 
     (0..hash_count).map(move |i| {
