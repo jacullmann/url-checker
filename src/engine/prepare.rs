@@ -17,7 +17,8 @@ pub fn handle_prepare() -> Result<()> {
         .build()
         .context("failed to create HTTP client")?;
 
-    // the dataset is streamed twice: first to count elements for optimal filter sizing,
+    // the dataset is streamed twice over the network instead of aching it to a temporary file:
+    // first to count elements for optimal filter sizing,
     // then to populate the filter. Counting upfront avoids resizing the memory-mapped file.
     let response = client
         .get(config::DATA_URL)
