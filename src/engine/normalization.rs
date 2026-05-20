@@ -16,3 +16,17 @@ pub fn normalize_url(input: &str) -> String {
         Err(_) => input.to_lowercase(),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_normalize_url() {
+        let expected = "https://example.com";
+
+        assert_eq!(normalize_url("example.com"), expected);
+        assert_eq!(normalize_url("https://example.com/"), expected);
+        assert_eq!(normalize_url("HTTPS://examplE.com?a=1#xY"), expected);
+    }
+}
