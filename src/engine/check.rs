@@ -1,13 +1,11 @@
 use crate::engine::{config, filter::BloomFilter, normalization::normalize_url};
-use anyhow::{Context, Result};
+use anyhow::{Context, Result, bail};
 use memmap2::Mmap;
 use std::{fs::File, io::Read};
 
 pub fn handle_check(raw_url: &str) -> Result<()> {
     if !std::path::Path::new(config::FILTER_PATH).exists() {
-        println!("couldn't find prepared data. please run 'prepare' first");
-
-        return Ok(());
+        bail!("couldn't find prepared data. run 'prepare' first")
     }
 
     let mut file = File::open(config::FILTER_PATH)
