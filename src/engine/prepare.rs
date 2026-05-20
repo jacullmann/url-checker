@@ -119,7 +119,7 @@ pub fn handle_prepare() -> Result<()> {
             let normalized = normalize_url(trimmed);
 
             for idx in bit_indices(&normalized, config::HASH_COUNT, bit_size) {
-                bit_slice[idx / 8] |= 1 << (idx % 8);
+                bit_slice[idx / 8] |= 1u8 << (idx % 8);
             }
 
             processed += 1;

@@ -42,7 +42,7 @@ impl<'a> BloomFilter<'a> {
 
     pub fn contains(&self, item: &str) -> bool {
         bit_indices(item, self.hash_count, self.bit_size)
-            .all(|idx| (self.bits[idx / 8] & (1 << (idx % 8))) != 0)
+            .all(|idx| (self.bits[idx / 8] & (1u8 << (idx % 8))) != 0)
     }
 }
 
@@ -59,7 +59,7 @@ mod tests {
 
         for url in urls {
             for idx in bit_indices(url, 7, bit_size) {
-                bits[idx / 8] |= 1 << (idx % 8);
+                bits[idx / 8] |= 1u8 << (idx % 8);
             }
         }
         (bits, bit_size)
