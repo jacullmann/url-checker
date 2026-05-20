@@ -22,7 +22,9 @@ pub fn handle_prepare() -> Result<()> {
     let response = client
         .get(config::DATA_URL)
         .send()
-        .with_context(|| format!("failed to fetch data from {}", config::DATA_URL))?;
+        .with_context(|| format!("failed to fetch data from {}", config::DATA_URL))?
+        .error_for_status()
+        .context("server returned an error")?;
 
     let mut reader = BufReader::new(response);
 
@@ -84,12 +86,17 @@ pub fn handle_prepare() -> Result<()> {
 
     let bit_slice = &mut mmap[16..];
 
-    let response = client.get(config::DATA_URL).send().with_context(|| {
-        format!(
-            "failed to fetch data from {} (second pass)",
-            config::DATA_URL
-        )
-    })?;
+    let response = client
+        .get(config::DATA_URL)
+        .send()
+        .with_context(|| {
+            format!(
+                "failed to fetch data from {} (second pass)",
+                config::DATA_URL
+            )
+        })?
+        .error_for_status()
+        .context("server returned an error")?;
 
     let mut reader = BufReader::new(response);
 
