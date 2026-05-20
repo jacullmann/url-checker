@@ -26,7 +26,13 @@ mod tests {
         let expected = "https://evil.example.com/free-bitcoins";
 
         assert_eq!(normalize_url("evil.example.com/free-bitcoins"), expected);
-        assert_eq!(normalize_url("https://evil.example.com/free-bitcoins/"), expected);
-        assert_eq!(normalize_url("HTTPS://evil.examplE.com/free-bitcoins?id=123"), expected);
+        assert_eq!(
+            normalize_url("https://evil.example.com/free-bitcoins/"),
+            expected
+        );
+        assert_eq!(
+            normalize_url("HTTPS://evil.examplE.com/free-bitcoins?id=123"),
+            expected
+        );
     }
 }
