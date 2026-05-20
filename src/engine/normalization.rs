@@ -23,10 +23,10 @@ mod tests {
 
     #[test]
     fn test_normalize_url() {
-        let expected = "https://example.com";
+        let expected = "https://evil.example.com/free-bitcoins";
 
-        assert_eq!(normalize_url("example.com"), expected);
-        assert_eq!(normalize_url("https://example.com/"), expected);
-        assert_eq!(normalize_url("HTTPS://examplE.com?a=1#xY"), expected);
+        assert_eq!(normalize_url("evil.example.com/free-bitcoins"), expected);
+        assert_eq!(normalize_url("https://evil.example.com/free-bitcoins/"), expected);
+        assert_eq!(normalize_url("HTTPS://evil.examplE.com/free-bitcoins?id=123"), expected);
     }
 }
